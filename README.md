@@ -1,6 +1,6 @@
 # King Algorithm Manifesto
 
-A research proposal on lifting out the meta-learned in-context learning algorithms for study and native execution.
+A research proposal on lifting out the meta-learned in-context learning algorithms from large Transformer models for study and native execution.
 
 ## Background
 
