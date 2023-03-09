@@ -57,7 +57,7 @@ So, instead of that, let's define a model which is conditioned by the input of t
 
 How to do that then? It's a bit unlike all the standard deep learning examples the internet is full of. No worries! We have many things on our side here. We see the activation deltas in the deep learning substrate, which by necessity need to encode the agent state change (plus some other stuff).
 
-So, we need to predict the substrate activation deltas from the agent observation, which is the virtual system input.
+So, we need to predict the substrate activation deltas from the agent observation, which is the virtual system input. What cannot be predicted by agent observation, isn't part of the agent's internal state.
 
 Jointly, we need to learn the agent input-output function itself. This can be a simple neural network, but since it is already evident that in-context learning is in its nature progressive, increasing in both computational elements and in stored state (more tokens to attend over) as the learning progresses, we should use something analogous here. We can optimize/fit an algorithm which constructs more computational elements as it progresses.
 
