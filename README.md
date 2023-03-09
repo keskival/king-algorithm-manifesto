@@ -8,17 +8,17 @@ Let me show you something interesting:
 
 ![](chatgpt-rl.jpg)
 
-In this contrived experiment we show a trivial form of in-context learning. #ChatGPT is capable of emulating an agent, and planning actions based on reinforcement learning.
+In this contrived experiment we show a trivial form of in-context learning. ChatGPT is capable of emulating an agent, and planning actions based on reinforcement learning.
 
 This is a widely known feature of large Transformer models. But it raises a question: What learning algorithm does it use? It's not backpropagating error, obviously, as the weights are fixed. It's not any of our known reinforcement learning algorithms, as those aren't as data-efficient and intelligent in exploration as in-context learning is.
 
 Granted, that data efficiency and intelligent exploration isn't visible in this contrived example to keep it short and simple, but trust me when I say the learning algorithm these things use is way beyond anything we have been able to engineer.
 
-It is a product of #MetaLearning, learning to learn.
+It is a product of meta-learning, learning to learn.
 
 If we could extract that family of learning algorithms it uses inside the Transformer model to emulate the personas, we can make truly amazing things.
 
-Let's call the large Transformer model "the substrate". This can be for example a large language model (LLM), or a large Transformer-based meta-learning reinforcement learning model. The learning algorithm resulting from meta learning is called "kernel learning algorithm", or "King Algorithm" in its lifted-out form, because it appears to be awesomely powerful and extremely data-efficient. It is possible, even likely that the King Algorithm isn't a neural network, or a differentiable computational graph at all.
+Let's call the large Transformer model "the substrate". This can be for example a large language model (LLM), or a large Transformer-based meta-learning reinforcement learning model. The learning algorithm resulting from meta-learning is called "kernel learning algorithm" here, or "King Algorithm" in its lifted-out form, because it appears to be awesomely powerful and extremely data-efficient. It is possible, even likely that the King Algorithm isn't a neural network, or a differentiable computational graph at all.
 
 ## Meta-learned Kernel Learning Algorithms
 
