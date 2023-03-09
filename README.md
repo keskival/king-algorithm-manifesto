@@ -18,7 +18,7 @@ It is a product of #MetaLearning, learning to learn.
 
 If we could extract that family of learning algorithms it uses inside the Transformer model to emulate the personas, we can make truly amazing things.
 
-Let's call the large Transformer model "the substrate". This can be for example a large language model (LLM), or a large Transformer-based meta-learning reinforcement learning model. The learning algorithm resulting from meta learning is called "kernel learning algorithm", or "King Algorithm" because it appears to be awesomely powerful and extremely data-efficient. It is possible, even likely that the King Algorithm isn't a neural network, or a differentiable computational graph at all.
+Let's call the large Transformer model "the substrate". This can be for example a large language model (LLM), or a large Transformer-based meta-learning reinforcement learning model. The learning algorithm resulting from meta learning is called "kernel learning algorithm", or "King Algorithm" in its lifted-out form, because it appears to be awesomely powerful and extremely data-efficient. It is possible, even likely that the King Algorithm isn't a neural network, or a differentiable computational graph at all.
 
 ## Meta-learned Kernel Learning Algorithms
 
