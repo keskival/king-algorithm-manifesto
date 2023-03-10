@@ -64,7 +64,7 @@ Jointly, we need to learn the agent input-output function itself. This can be a 
 We could predict the state update with a neural network as well, but while possibly very useful, let's not, because we still wouldn't be able to understand it afterwards. Let's optimize/fit an explainable algorithm there as well.
 
 So, we have two functions to learn jointly:
-- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges to `substrate_activation_change(agent_observation) ~ agent_state_change(observation)`, because that's everything that can be predicted from the observation.
+- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges to `substrate_activation_change(agent_observation) → agent_state_change(observation)`, because that's everything that can be predicted from the observation.
 - `agent_action(observation, agent_state)` fitted to ground truth `agent_action`.
 
 There are certain details here we should not gloss over:
