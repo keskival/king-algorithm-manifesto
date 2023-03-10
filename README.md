@@ -16,7 +16,7 @@ Granted, that data efficiency and intelligent exploration isn't visible in this 
 
 It is a product of meta-learning, learning to learn.
 
-If we could extract that family of learning algorithms it uses inside the Transformer model to emulate the personas, we can make truly amazing things.
+If we could extract that family of learning algorithms it uses inside the Transformer model to emulate the agents, we can make truly amazing things.
 
 Let's call the large Transformer model "the substrate". This can be for example a large language model (LLM), or a large Transformer-based meta-learning reinforcement learning model. The learning algorithm resulting from meta-learning is called "kernel learning algorithm" here, or "King Algorithm" in its lifted-out form, because it appears to be awesomely powerful and extremely data-efficient. It is possible, even likely that the King Algorithm isn't a neural network, or a differentiable computational graph at all.
 
@@ -64,15 +64,17 @@ Jointly, we need to learn the agent input-output function itself. This can be a 
 We could predict the state update with a neural network as well, but while possibly very useful, let's not, because we still wouldn't be able to understand it afterwards. Let's optimize/fit an explainable algorithm there as well.
 
 So, we have two functions to learn jointly:
-- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges to `substrate_activation_change(agent_observation) → agent_state_change(observation)`, because that's everything that can be predicted from the observation.
+- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges roughly to `substrate_activation_change(agent_observation) → agent_state_change(observation)`, because the agent's internal state is contained in the part modified as a result of the information contained in the observation.
 - `agent_action(observation, agent_state)` fitted to ground truth `agent_action`.
 
-There are certain details here we should not gloss over:
+There are certain details here we should not gloss over. I'm focusing on LLMs for now because these models are available to me, whereas trained deep meta-learning Transformer models aren't. The subsequent points are about LLMs, the deep meta-learning Transformer models are slightly different but have analogous considerations:
 
 - `agent_state = previous_agent_state ⁀ agent_state_change(observation)`, and this cannot be a constant sized vector because the size of substrate activations increases linearly with the number of tokens, so this should too. Hence "`⁀`" denotes concatenation.
 - Activations and changes thereof are progressively increasing data structures. Because the GPT models are decoder-only stacks, the attention layers are masked and cannot see the future, and old activations are cached, it helps in this. The only state that can change are the activations related to the newest token. That means the agent state is accretive, just like GPT state growth. This means that the deltas are actually simply the activations which were added to the internal LLM layer cache with the newest token during inference.
 - Not only the state size, but the number of operations required for inference increases linearly in LLM models as the state grows. The model to be fitted to the agent should grow similarly along with the increased state.
 - Since the models we fit to the agent state estimation and the agent action estimation need to be explainable and therefore are likely not differentiable, they should be fitted with reinforcement learning, simulated annealing, genetic algorithms or such.
+- Encodings the observation and the action of an agent should be minimal descriptions. Observations need to be projected into textual descriptions of "agent observes the following: ..." and actions need to be interpretable from LLM described agent actions such as: "agent goes forward". Luckily LLMs can be coached to describe agent actions in specific, structured ways.
+- Observations and actions can span over multiple tokens. If possible, we can create a scheme where these are described by single tokens, but it is likely that the capacity of the language model and the agent it emulates would decrease as then there are fewer computation operations it can do with fewer tokens. So it might not make sense to pack the information into as few tokens as possible. If so, the model state per observation also spans multiple token positions in the decoder layers. This means that the model predicting the state change needs to be able to predict it in arbitrary sizes. The agent action model will need to take in arbitrary sizes of states as inputs in any case.
 
 ## Citing
 
