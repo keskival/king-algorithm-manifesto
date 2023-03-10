@@ -63,6 +63,16 @@ Jointly, we need to learn the agent input-output function itself. This can be a 
 
 We could predict the state update with a neural network as well, but while possibly very useful, let's not, because we still wouldn't be able to understand it afterwards. Let's optimize/fit an explainable algorithm there as well.
 
+So, we have two functions to learn jointly:
+- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges to `substrate_activation_change(agent_observation) ~ agent_state_change(observation)`, because that's everything that can be predicted from the observation.
+- `agent_action(observation, agent_state)` fitted to ground truth `agent_action`.
+
+There are certain details here we should not gloss over:
+
+- `agent_state = previous_agent_state ⁀ agent_state_change(observation)`, and this cannot be a constant sized vector because the size of substrate activations increases linearly with the number of tokens, so this should too. Hence "`⁀`" denotes concatenation.
+- Activations and changes thereof are progressively increasing data structures. Because the GPT models are decoder-only stacks, the attention layers are masked and cannot see the future, and old activations are cached, it helps in this. The only state that can change are the activations related to the newest token. That means the agent state is accretive, just like GPT state growth. This means that the deltas are actually simply the activations which were added to the internal LLM layer cache with the newest token during inference.
+- Not only the state size, but the number of operations increases in LLM models as the state grows. The model to be fitted to the agent should grow similarly along with the increased state.
+
 ## Citing
 
 King Algorithm Manifesto
