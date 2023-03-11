@@ -80,7 +80,7 @@ There are certain details here we should not gloss over. I'm focusing on LLMs fo
 - Encodings the observation and the action of an agent should be minimal descriptions. Observations need to be projected into textual descriptions of "agent observes the following: ..." and actions need to be interpretable from LLM described agent actions such as: "agent goes forward". Luckily LLMs can be coached to describe agent actions in specific, structured ways.
 - Observations and actions can span over multiple tokens. If possible, we can create a scheme where these are described by single tokens, but it is likely that the capacity of the language model and the agent it emulates would decrease as then there are fewer computation operations it can do with fewer tokens. So it might not make sense to pack the information into as few tokens as possible. If so, the model state per observation also spans multiple token positions in the decoder layers. This means that the model predicting the state change needs to be able to predict it in arbitrary sizes. The agent action model will need to take in arbitrary sizes of states as inputs in any case.
 
-## Description of an Experiment
+## Data Collection Description
 
 We need a lot of data where an LLM is fed a prompt which defines an agent in an environment.
 
@@ -100,9 +100,17 @@ Since we need the LLM internal state for optimizing the interpretable algorithms
 
 Since we want the LLM to consider its observations and actions, we should designate them with short words, but postfix them with some standard text like "what would I do next?" or similar, to give the LLM several tokens to consider the implications.
 
-The agent and the environment need to be somehow archetypal to give the LLM a lot of learned intelligence that it has derived from training materials. This means that maybe for example children's games or common human situations like work interviews should be good topics, and the agent could be the "young Einstein" or something like that. The more cheesy and stereotypical, the better, because this makes the episodes span the space well known by the LLM.
+The agent and the environment need to be somehow archetypal to give the LLM a lot of learned intelligence that it has derived from training materials. This means that maybe for example children's games or common human situations like work interviews or dating should be good topics, and the agent could be the "young Einstein" or something like that. The more cheesy and stereotypical, the better, because this makes the episodes span the space well known by the LLM.
 
 Spatial and mechanical domains are very foreign to LLMs for obvious reasons, while human interactions are their specialty. We should try to formulate the learning scenario in a way that allows exploration and learning in a psychological space rather than spatially. Hence, interview situations might be a promising topic to explore.
+
+## Dating as a Learning Challenge
+
+So, exploring dating as a scenario for a bit:
+- The goal of an agent is to efficiently find out compatibility while trying to give the best possible impression of oneself. This is symmetric between both agents, however, while the agents know their own internal state, they don't know the internal state of the other. So in practice we would need to designate one of the agents as a mystery, whose state isn't described in the prompt, to be discovered by the agent progressively.
+- The scenario unfolds naturally as a discourse, but it is a bit difficult to describe the space of observations and actions.
+- We could procedurally create alternative observations by choosing various answers to questions made by the agent, and choosing different alternative questions by the counterpart to the agent, where the generated responses become actions by the agent.
+- The answers should have complex implications, so maybe not make it about being a "dog person or a cat person", but more like deeper things like politics, goals in life, religion, health, work, family.
 
 ## Citing
 
