@@ -112,6 +112,8 @@ So, exploring dating as a scenario for a bit:
 - We could procedurally create alternative observations by choosing various answers to questions made by the agent, and choosing different alternative questions by the counterpart to the agent, where the generated responses become actions by the agent.
 - The answers should have complex implications, so maybe not make it about being a "dog person or a cat person", but more like deeper things like politics, goals in life, religion, health, work, family.
 
+How to define this scenario very natural for LLMs so that it has features needed to show reinforcement learning or some other kind of algorithmic learning happening?
+
 ## Citing
 
 King Algorithm Manifesto
