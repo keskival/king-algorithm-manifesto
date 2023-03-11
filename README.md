@@ -80,6 +80,30 @@ There are certain details here we should not gloss over. I'm focusing on LLMs fo
 - Encodings the observation and the action of an agent should be minimal descriptions. Observations need to be projected into textual descriptions of "agent observes the following: ..." and actions need to be interpretable from LLM described agent actions such as: "agent goes forward". Luckily LLMs can be coached to describe agent actions in specific, structured ways.
 - Observations and actions can span over multiple tokens. If possible, we can create a scheme where these are described by single tokens, but it is likely that the capacity of the language model and the agent it emulates would decrease as then there are fewer computation operations it can do with fewer tokens. So it might not make sense to pack the information into as few tokens as possible. If so, the model state per observation also spans multiple token positions in the decoder layers. This means that the model predicting the state change needs to be able to predict it in arbitrary sizes. The agent action model will need to take in arbitrary sizes of states as inputs in any case.
 
+## Description of an Experiment
+
+We need a lot of data where an LLM is fed a prompt which defines an agent in an environment.
+
+From this static state, we can feed the LLM various observations, and record the actions it implies in its continuation.
+
+Both the observations and actions need to be from relatively small enumerable sets.
+
+This means that to get more data, we need to do the same across many different states of the agent. The states here mean the agent must have learned something from the previous observations which affect the way it responds to the observations in the immediate future.
+
+Since we need a large number of these, they will need to be procedurally generated. To reduce the number of possible confounding variables, the induced agent is kept similar across all episodes.
+
+Since the observations should not only affect the immediate action of an agent, but also designate some new information about the world which would have persistent consequences to how the agent behaves in the future, we need to limit the information given to the agent at any one time so that it will have things to learn in the subsequent steps as well.
+
+Since we want to understand what is the internal representation of the learned knowledge, it would be great if we can procedurally label observations also with what learnings are assumed to be in it.
+
+Since we need the LLM internal state for optimizing the interpretable algorithms, we need to record the activations in the LLM accordingly.
+
+Since we want the LLM to consider its observations and actions, we should designate them with short words, but postfix them with some standard text like "what would I do next?" or similar, to give the LLM several tokens to consider the implications.
+
+The agent and the environment need to be somehow archetypal to give the LLM a lot of learned intelligence that it has derived from training materials. This means that maybe for example children's games or common human situations like work interviews should be good topics, and the agent could be the "young Einstein" or something like that. The more cheesy and stereotypical, the better, because this makes the episodes span the space well known by the LLM.
+
+Spatial and mechanical domains are very foreign to LLMs for obvious reasons, while human interactions are their specialty. We should try to formulate the learning scenario in a way that allows exploration and learning in a psychological space rather than spatially. Hence, interview situations might be a promising topic to explore.
+
 ## Citing
 
 King Algorithm Manifesto
