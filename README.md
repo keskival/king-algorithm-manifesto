@@ -114,6 +114,10 @@ So, exploring dating as a scenario for a bit:
 
 How to define this scenario very natural for LLMs so that it has features needed to show reinforcement learning or some other kind of algorithmic learning happening?
 
+Salient features:
+- Reward assignment: The counterpart rejects or approves, why?
+- Multiple trials showing rational evolution of behavior.
+
 ## Citing
 
 King Algorithm Manifesto
