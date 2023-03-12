@@ -112,11 +112,18 @@ So, exploring dating as a scenario for a bit:
 - We could procedurally create alternative observations by choosing various answers to questions made by the agent, and choosing different alternative questions by the counterpart to the agent, where the generated responses become actions by the agent.
 - The answers should have complex implications, so maybe not make it about being a "dog person or a cat person", but more like deeper things like politics, goals in life, religion, health, work, family.
 
-How to define this scenario very natural for LLMs so that it has features needed to show reinforcement learning or some other kind of algorithmic learning happening?
+How to define this scenario which is very natural for LLMs so that it has features needed to show reinforcement learning or some other kind of algorithmic learning happening?
 
 Salient features:
 - Reward assignment: The counterpart rejects or approves, why?
 - Multiple trials showing rational evolution of behavior.
+
+## Job Interview as a Learning Challenge
+
+- We can formulate this as a simple yes/no question battery where the exploration of alternative paths is possible.
+- As the agent gets repeated trials, it needs to assign reward/penalty to specific actions taken based on feedback.
+- Feedback can be more complex than just positive/negative, and thus the reward assignment can become rationally guided rather than combinatorial.
+- It's possible to generate a lot of question battery episodes with different expected answers.
 
 ## Citing
 
