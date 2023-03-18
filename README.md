@@ -125,6 +125,9 @@ Salient features:
 - Feedback can be more complex than just positive/negative, and thus the reward assignment can become rationally guided rather than combinatorial.
 - It's possible to generate a lot of question battery episodes with different expected answers.
 
+Here is the first trial of the concept with the prompt [here](prompts.txt):
+![](chatgpt-rl-job-interview.jpg)
+
 ## Citing
 
 King Algorithm Manifesto
