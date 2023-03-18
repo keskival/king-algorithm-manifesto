@@ -8,7 +8,7 @@ Let me show you something interesting:
 
 <img src="https://github.com/keskival/king-algorithm-manifesto/raw/main/chatgpt-rl.jpg" width="250">
 
-In this contrived experiment we show a trivial form of in-context learning. ChatGPT is capable of emulating an agent, and planning actions based on reinforcement learning.
+In this contrived experiment we show a trivial form of in-context learning. ChatGPT is capable of emulating an agent, and planning actions based on reinforcement learning. You can see it making rational choices for choosing the button B based on past observed rewards.
 
 This is a widely known feature of large Transformer models. But it raises a question: What learning algorithm does it use? It's not backpropagating error, obviously, as the weights are fixed. It's not any of our known reinforcement learning algorithms, as those aren't as data-efficient and intelligent in exploration as in-context learning is.
 
