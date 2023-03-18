@@ -6,7 +6,7 @@ A research proposal on lifting out the meta-learned in-context learning algorith
 
 Let me show you something interesting:
 
-![](chatgpt-rl.jpg | width=200)
+<img src="https://github.com/keskival/king-algorithm-manifesto/raw/main/chatgtp-rl.jpg" width="200">
 
 In this contrived experiment we show a trivial form of in-context learning. ChatGPT is capable of emulating an agent, and planning actions based on reinforcement learning.
 
@@ -126,7 +126,8 @@ Salient features:
 - It's possible to generate a lot of question battery episodes with different expected answers.
 
 Here is the first trial of the concept with the prompt [here](prompts.txt):
-![](chatgpt-rl-job-interview.jpg | width=200)
+
+<img src="https://github.com/keskival/king-algorithm-manifesto/raw/main/chatgtp-rl-job-interview.jpg" width="200">
 
 ## Citing
 
