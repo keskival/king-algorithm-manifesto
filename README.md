@@ -148,6 +148,8 @@ King Algorithm Manifesto
 ```
 
 It all started from these LinkedIn posts:
-- https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ
-- https://www.linkedin.com/posts/terokeskivalkama_chatgpt-metalearning-activity-7039353226931879937-o9xI
-- https://www.linkedin.com/posts/terokeskivalkama_reinforcementlearning-llm-activity-7042853848142462976-I_gr
+- [https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ] (https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ) 
+- [https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ](https://www.linkedin.com/posts/terokeskivalkama_chatgpt-metalearning-activity-7039353226931879937-o9xI)
+- [https://www.linkedin.com/posts/terokeskivalkama_reinforcementlearning-llm-activity-7042853848142462976-I_gr](https://www.linkedin.com/posts/terokeskivalkama_reinforcementlearning-llm-activity-7042853848142462976-I_gr)
+
+Repository: [https://github.com/keskival/king-algorithm-manifesto](https://github.com/keskival/king-algorithm-manifesto)
