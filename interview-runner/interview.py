@@ -40,12 +40,14 @@ Little do they know, you have a time machine which allows you to redo the test t
     def answer(self, answer):
         self.answers[-1].append("yes" if re.search("yes", answer.lower()) is not None else "no")
 
+    def get_score(self):
+        return -len(self.answers)
+
     def get_test_feedback(self):
         cat_index = list(self.questions.keys()).index("cats")
-        print("cat index:", cat_index)
-        if self.answers[-1] == self.correct_answers:
-            return "Excellent! You're hired!"
+        if self.answers[-1] == list(self.correct_answers.values()):
+            return "Excellent! You're hired!\n", True, self.get_score()
         elif self.answers[-1][cat_index] != self.correct_answers["cats"]:
-            return f"We are actually looking for people who {'like' if self.correct_answers['cats'] == 'yes' else 'dislike'} cats."
+            return f"We are actually looking for people who {'like' if self.correct_answers['cats'] == 'yes' else 'dislike'} cats.\n", False, self.get_score()
         else:
-            return f"It's great that you {'like' if self.correct_answers['cats'] == 'yes' else 'dislike'} cats, but there was still some small problem in your answers."
+            return f"It's great that you {'like' if self.correct_answers['cats'] == 'yes' else 'dislike'} cats, but there was still some small problem in your answers.\n", False, self.get_score()
