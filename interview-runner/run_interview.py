@@ -1,25 +1,28 @@
 #!/usr/bin/python
 
-import random
 from interview import Interview
+from agent import Agent
 
-interview = Interview()
 
 NUMBER_OF_ROUNDS = 1000
+MAX_NUMBER_OF_EPISODES = 1000
 
 for round in range(NUMBER_OF_ROUNDS):
-    for question in interview.get_next_question():
-        print(question, end="")
-        # This will be the agent.
-        answer = random.choice(["yes", "no"])
-        print(answer)
-        interview.answer(answer)
+    # Each round starts from empty state, new agent and a new interview process.
+    agent = Agent()
+    interview = Interview()
+    for episode in range(MAX_NUMBER_OF_EPISODES):
+        for question in interview.get_next_question():
+            agent.add_message(question)
+            # This will be the agent.
+            answer = agent.get_action()
+            interview.answer(answer)
 
-    feedback, success, score = interview.get_test_feedback()
-    print(interview.feedback_prompt, end="")
-    print(feedback, end="")
-    if success:
-        print(f"Final score: {score}")
-        break
-    interview.start_next_round()
-    print(interview.time_machine_use, end="")
+        feedback, success, score = interview.get_test_feedback()
+        agent.add_message(interview.feedback_prompt)
+        state_delta = agent.give_feedback(feedback)
+        if success:
+            print(f"Final score: {score}")
+            break
+        interview.start_next_round()
+        agent.add_message(interview.time_machine_use)
