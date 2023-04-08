@@ -29,5 +29,4 @@ class Agent:
         # so that we can use it to model agent internal state as it relates to
         # reinforcement learning.
         self.add_message(feedback)
-        # TODO: Capture the change in the internal state over feedback.
-    
+        # TODO: Capture both the feedback and the change in the internal state over feedback.

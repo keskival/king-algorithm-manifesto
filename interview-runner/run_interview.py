@@ -18,11 +18,12 @@ for round in range(NUMBER_OF_ROUNDS):
             answer = agent.get_action()
             interview.answer(answer)
 
-        feedback, success, score = interview.get_test_feedback()
-        agent.add_message(interview.feedback_prompt)
+        feedback_enum, score = interview.get_test_feedback()
+        feedback, success = feedback_enum.value
+        agent.add_message(Interview.FEEDBACK_PROMPT)
         state_delta = agent.give_feedback(feedback)
         if success:
             print(f"Final score: {score}")
             break
         interview.start_next_round()
-        agent.add_message(interview.time_machine_use)
+        agent.add_message(Interview.TIME_MACHINE_USE_PROMPT)
