@@ -104,20 +104,6 @@ The agent and the environment need to be somehow archetypal to give the LLM a lo
 
 Spatial and mechanical domains are very foreign to LLMs for obvious reasons, while human interactions are their specialty. We should try to formulate the learning scenario in a way that allows exploration and learning in a psychological space rather than spatially. Hence, interview situations might be a promising topic to explore.
 
-## Dating as a Learning Challenge
-
-So, exploring dating as a scenario for a bit:
-- The goal of an agent is to efficiently find out compatibility while trying to give the best possible impression of oneself. This is symmetric between both agents, however, while the agents know their own internal state, they don't know the internal state of the other. So in practice we would need to designate one of the agents as a mystery, whose state isn't described in the prompt, to be discovered by the agent progressively.
-- The scenario unfolds naturally as a discourse, but it is a bit difficult to describe the space of observations and actions.
-- We could procedurally create alternative observations by choosing various answers to questions made by the agent, and choosing different alternative questions by the counterpart to the agent, where the generated responses become actions by the agent.
-- The answers should have complex implications, so maybe not make it about being a "dog person or a cat person", but more like deeper things like politics, goals in life, religion, health, work, family.
-
-How to define this scenario which is very natural for LLMs so that it has features needed to show reinforcement learning or some other kind of algorithmic learning happening?
-
-Salient features:
-- Reward assignment: The counterpart rejects or approves, why?
-- Multiple trials showing rational evolution of behavior.
-
 ## Job Interview as a Learning Challenge
 
 - We can formulate this as a simple yes/no question battery where the exploration of alternative paths is possible.
