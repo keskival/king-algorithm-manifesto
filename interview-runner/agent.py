@@ -4,6 +4,20 @@ class Agent:
     """
     The agent class runs through multiple episodes until it either fails or solves the task.
     It collects the following data for performances.
+
+    We need to store for every decision taken:
+    - (feedback states, observation, observation state, decision, decision state) for every decision taken. The last feedback is the neural activation of the last
+      decoder column between the start of feedback and end of feedback.
+      The observation is the categorical id of the question.
+      The observation state is the neural activation columns between the start and end of one question.
+      Decision is a boolean yes/no which corresponds to the answers. Decision state is the column of activations for the yes/no answer.
+    For every feedback, that is, episode:
+    - (feedback, feedback state) for every feedback received. The feedback is a categorical id of the feedback given.
+    - We could store all the states between other prompts as well, as they represent thinking about inputs already seen before,
+      but I don't think those are useful for modelling the agent learning algorithm.
+    For every round:
+    - (score) for every round.
+    These tuples can be used to fit different models which tell us how these system learn.
     """
     def __init__(self):
         # TODO: Put in Alpaca or something similar here.
