@@ -47,7 +47,7 @@ Next we'll need to define virtual system boundaries to envelope the emulated age
 
 In a large language model we can tell what the emulated agent observes by text prompts. These are inputs to the virtual system, and the observations of the agent. Similarly the outputs of the virtual system are what the large language model describes as actions of the emulated agent.
 
-For deep Transformer model meta-learning reinforcement learning models the above is even simpler, because there we already have defined observations and actions of the individual agents playing the game.
+For deep Transformer model meta-learning reinforcement learning models the above is even simpler, because there we already have defined observations and actions of the individual agents playing the game. A special form of observation is the feedback of the task performance, which in reinforcement learning is called "reward".
 
 Now we know what we are playing with; but how to model the kernel algorithm? Let's use AI!
 
@@ -61,14 +61,14 @@ It is likely the LLM in-context learning algorithms are good at remembering fact
 
 However, I don't have access to those trained RL meta-learning models so I'm going with the LLMs as a proof-of-concept.
 
-So, we need to predict the substrate activation deltas from the agent observation, which is the virtual system input. What cannot be predicted by agent observation, isn't part of the agent's internal state.
+So, we need to predict the substrate activation deltas from the agent feedback, which is the virtual system input. What cannot be predicted by agent feedback, isn't part of the agent's internal state.
 
 Jointly, we need to learn the agent input-output function itself. This can be a simple neural network, but since it is already evident that in-context learning is in its nature progressive, increasing in both computational elements and in stored state (more tokens to attend over) as the learning progresses, we should use something analogous here. We can optimize/fit an algorithm which constructs more computational elements as it progresses.
 
 We could predict the state update with a neural network as well, but while possibly very useful, let's not, because we still wouldn't be able to understand it afterwards. Let's optimize/fit an explainable algorithm there as well.
 
 So, we have two functions to learn jointly:
-- `substrate_activation_change(agent_observation)` fitted to ground truth `substrate_activation_change` actually converges roughly to `substrate_activation_change(agent_observation) → agent_state_change(observation)`, because the agent's internal state is contained in the part modified as a result of the information contained in the observation.
+- `substrate_activation_change(agent_feedback)` fitted to ground truth `substrate_activation_change` actually converges roughly to `substrate_activation_change(agent_feedback) → agent_state_change(agent_feedback)`, because the agent's internal state is contained in the part modified as a result of the information contained in the feedback. We should learn this in a separable form where the constant part not dependent on what the feedback was, and the feedback dependent part, so that we can easily see what the feedback causes.
 - `agent_action(observation, agent_state)` fitted to ground truth `agent_action`.
 
 There are certain details here we should not gloss over. I'm focusing on LLMs for now because these models are available to me, whereas trained deep meta-learning Transformer models aren't. The subsequent points are about LLMs, the deep meta-learning Transformer models are slightly different but have analogous considerations:
@@ -77,28 +77,28 @@ There are certain details here we should not gloss over. I'm focusing on LLMs fo
 - Activations and changes thereof are progressively increasing data structures. Because the GPT models are decoder-only stacks, the attention layers are masked and cannot see the future, and old activations are cached, it helps in this. The only state that can change are the activations related to the newest token. That means the agent state is accretive, just like GPT state growth. This means that the deltas are actually simply the activations which were added to the internal LLM layer cache with the newest token during inference.
 - Not only the state size, but the number of operations required for inference increases linearly in LLM models as the state grows. The model to be fitted to the agent should grow similarly along with the increased state.
 - Since the models we fit to the agent state estimation and the agent action estimation need to be explainable and therefore are likely not differentiable, they should be fitted with reinforcement learning, simulated annealing, genetic algorithms or such.
-- Encodings the observation and the action of an agent should be minimal descriptions. Observations need to be projected into textual descriptions of "agent observes the following: ..." and actions need to be interpretable from LLM described agent actions such as: "agent goes forward". Luckily LLMs can be coached to describe agent actions in specific, structured ways.
-- Observations and actions can span over multiple tokens. If possible, we can create a scheme where these are described by single tokens, but it is likely that the capacity of the language model and the agent it emulates would decrease as then there are fewer computation operations it can do with fewer tokens. So it might not make sense to pack the information into as few tokens as possible. If so, the model state per observation also spans multiple token positions in the decoder layers. This means that the model predicting the state change needs to be able to predict it in arbitrary sizes. The agent action model will need to take in arbitrary sizes of states as inputs in any case.
+- Encodings the observation, the feedback and the action of an agent should be minimal descriptions. Observations need to be projected into textual descriptions of "agent observes the following: ..." and actions need to be interpretable from LLM described agent actions such as: "agent goes forward". Luckily LLMs can be coached to describe agent actions in specific, structured ways.
+- Observations, feedback and actions can span over multiple tokens. If possible, we can create a scheme where these are described by single tokens, but it is likely that the capacity of the language model and the agent it emulates would decrease as then there are fewer computation operations it can do with fewer tokens. So it might not make sense to pack the information into as few tokens as possible. If so, the model state per feedback also spans multiple token positions in the decoder layers. This means that the model predicting the state change needs to be able to predict it in arbitrary sizes. The agent action model will need to take in arbitrary sizes of states as inputs in any case.
 
 ## Data Collection Description
 
 We need a lot of data where an LLM is fed a prompt which defines an agent in an environment.
 
-From this static state, we can feed the LLM various observations, and record the actions it implies in its continuation.
+From this static state, we can feed the LLM various observations and feedbacks, and record the actions it implies in its continuation.
 
-Both the observations and actions need to be from relatively small enumerable sets.
+The observations, the feedback and the actions need to be from relatively small enumerable sets.
 
-This means that to get more data, we need to do the same across many different states of the agent. The states here mean the agent must have learned something from the previous observations which affect the way it responds to the observations in the immediate future.
+This means that to get more data, we need to do the same across many different states of the agent. The states here mean the agent must have learned something from the previous feedback which affect the way it responds to the observations in the immediate future.
 
 Since we need a large number of these, they will need to be procedurally generated. To reduce the number of possible confounding variables, the induced agent is kept similar across all episodes.
 
-Since the observations should not only affect the immediate action of an agent, but also designate some new information about the world which would have persistent consequences to how the agent behaves in the future, we need to limit the information given to the agent at any one time so that it will have things to learn in the subsequent steps as well.
+Since the feedback and the observations should not only affect the immediate action of an agent, but also designate some new information about the world which would have persistent consequences to how the agent behaves in the future, we need to limit the information given to the agent at any one time so that it will have things to learn in the subsequent steps as well.
 
 Since we want to understand what is the internal representation of the learned knowledge, it would be great if we can procedurally label observations also with what learnings are assumed to be in it.
 
 Since we need the LLM internal state for optimizing the interpretable algorithms, we need to record the activations in the LLM accordingly.
 
-Since we want the LLM to consider its observations and actions, we should designate them with short words, but postfix them with some standard text like "what would I do next?" or similar, to give the LLM several tokens to consider the implications.
+Since we want the LLM to consider its observations, feedback and actions, we should designate them with short words, but postfix them with some standard text like "what would I do next?" or similar, to give the LLM several tokens to consider the implications.
 
 The agent and the environment need to be somehow archetypal to give the LLM a lot of learned intelligence that it has derived from training materials. This means that maybe for example children's games or common human situations like work interviews or dating should be good topics, and the agent could be the "young Einstein" or something like that. The more cheesy and stereotypical, the better, because this makes the episodes span the space well known by the LLM.
 
