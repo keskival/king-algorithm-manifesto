@@ -121,6 +121,8 @@ Here we see a clear example of reward assignment. ChatGPT is able to learn from 
 - It also performs rational exploration of the zero-shot in-context learned space of action sequences even when the feedback doesn't associate to the specific action in the past. The agent tries to vary its choices in a rational way to explore the outcome space. Our engineered reinforcement learning algorithms are really bad at this, as they would randomly try all kinds of things instead of rationally exploring the deterministic component of the outcome space.
 - It is able to interpret a verbal feedback as reward or penalty, depending on the goal of the agent. The same feedback could be interpreted as positive or negative depending on the goals of the agent. Our engineered reinforcement learning algorithms are largely incapable of doing that, and instead require numeric values for rewards.
 
+See initial code [here](./interview-runner).
+
 ## Citing
 
 King Algorithm Manifesto
