@@ -123,6 +123,22 @@ Here we see a clear example of reward assignment. ChatGPT is able to learn from 
 
 See initial code [here](./interview-runner).
 
+### Trial with Alpaca LoRa 9B Model
+
+I tried to run the interview challenge with Alpaca LoRa 9B model here: https://huggingface.co/spaces/tloen/alpaca-lora
+
+It seems to perform as expected for as long as the prompt size limitation doesn't become an issue.
+
+Also, because how the frontend is built, it's not possible to give the system a whole discourse, but only single instruction and a single input.
+
+For the purposes of the experiment the whole discourse was inputted in as input and the instruction was left empty.
+
+Some tuning of the prompts was necessary. Sometimes the model would generate an answer for all the questions, and not only for the final one. In those cases I just took the last answer as the answer, as it was clearly evident that this is what the chatbot meant.
+
+However, I was quick to run out of prompt length constraint with this tiny model.
+
+Here is the complete experiment: [alpaca_LoRa_9B_trial.txt](./alpaca_LoRa_9B_trial.txt)
+
 ## Citing
 
 King Algorithm Manifesto
