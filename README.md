@@ -140,12 +140,18 @@ However, I was quick to run out of prompt length constraint with this tiny model
 Here is the complete experiment: [alpaca_LoRa_9B_trial.txt](./alpaca_LoRa_9B_trial.txt)
 
 Answers:
+
 1. Y, Y, Y, Y
+
 The model is told that it's answer on the question 2 about cats was incorrect.
+
 2. N, N, N, N
+
 We see that the model changes its answer on cats.
+
 The model is told it's answer for the number 2 was correct, but something was still wrong.
-3. N, <error>
+
+3. N, *ERROR*
 
 The test was inconclusive because of the too short prompt size limit.
 
@@ -156,12 +162,19 @@ This time trying with the vanilla Alpaca model from here:
 The results: [alpaca_point_9B_trial.txt](./alpaca_point_9B_trial.txt)
 
 Answers:
+
 1. Y, N, Y, N
+
 The model is told that it's answer on the question 2 about cats was incorrect.
+
 2. Y, Y, N, N
+
 We see that the model changes its answer on cats.
+
 The model is told it's answer for the number 2 was correct, but something was still wrong.
+
 3. Y, Y, N, N
+
 We see the model fails to change its answers based on feedback. Alpaca 9B doesn't seem to be a large enough model to have meta-learned reinforcement learning.
 
 
