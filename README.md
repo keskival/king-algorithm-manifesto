@@ -131,7 +131,7 @@ It seems to perform as expected for as long as the prompt size limitation doesn'
 
 Also, because how the frontend is built, it's not possible to give the system a whole discourse, but only single instruction and a single input.
 
-For the purposes of the experiment the whole discourse was inputted in as input and the instruction was left empty.
+For the purposes of the experiment the whole discourse was inputted in as input and the instruction was left empty. It would seem that it would actually be better to just use the instruction field and leave the input empty based on Alpaca training regime, but it made no difference to this preliminary validation.
 
 Some tuning of the prompts was necessary. Sometimes the model would generate an answer for all the questions, and not only for the final one. In those cases I just took the last answer as the answer, as it was clearly evident that this is what the chatbot meant.
 
