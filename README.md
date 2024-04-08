@@ -115,7 +115,7 @@ Here is the first trial of the concept with the prompt [here](prompts.txt):
 
 <img src="https://github.com/keskival/king-algorithm-manifesto/raw/main/chatgpt-rl-job-interview.jpg" width="250">
 
-Here we see a clear example of reward assignment. ChatGPT is able to learn from the past episodes and assign the reason for failing the task in two ways:
+Here we see a clear example of reward assignment. ChatGPT is able to learn from the past episodes and assign the reason for failing the task in at least four ways:
 - Associating the feedback to a specific past action when the feedback allows it ("We are actually looking for people who like cats."). Our engineered reinforcement algorithms are really bad at this.
 - It assigns rewards and penalties to specific action-related tokens in the past, although there are many tokens in the prompt. This shows reward assignment over significant distances. Our engineered reinforcement learning algorithms are generally very bad at this, and instead assign rewards across all time indices instead of only the crucial ones understood to affect the outcome.
 - It also performs rational exploration of the zero-shot in-context learned space of action sequences even when the feedback doesn't associate to the specific action in the past. The agent tries to vary its choices in a rational way to explore the outcome space. Our engineered reinforcement learning algorithms are really bad at this, as they would randomly try all kinds of things instead of rationally exploring the deterministic component of the outcome space.
