@@ -179,7 +179,7 @@ We see the model fails to change its answers based on feedback. Alpaca 9B doesn'
 
 ## References
 
-- [Meta-in-context learning in large language models](https://openrevi](https://arxiv.org/abs/2305.12907)
+- [Meta-in-context learning in large language models](https://arxiv.org/abs/2305.12907)
 
 ## Citing
 
