@@ -177,6 +177,9 @@ The model is told it's answer for the number 2 was correct, but something was st
 
 We see the model fails to change its answers based on feedback. Alpaca 9B doesn't seem to be a large enough model to have meta-learned reinforcement learning.
 
+## References
+
+- [Meta-in-context learning in large language models](https://openreview.net/forum?id=sx0xpaO0za&referrer=%5Bthe%20profile%20of%20Eric%20Schulz%5D(%2Fprofile%3Fid%3D~Eric_Schulz1)
 
 ## Citing
 
