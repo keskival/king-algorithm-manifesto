@@ -189,9 +189,14 @@ King Algorithm Manifesto
 @article{keskival2023embodied,
   title={King Algorithm Manifesto},
   author={Keski-Valkama, Tero},
-  year={2023}
+  year={2023},
+  doi={doi/10.5281/zenodo.13207315}
 }
 ```
+
+[![DOI](https://zenodo.org/badge/611484341.svg)](https://zenodo.org/doi/10.5281/zenodo.13207315)
+
+## Posts
 
 It all started from these LinkedIn posts:
 - [https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ](https://www.linkedin.com/posts/terokeskivalkama_deeplearning-chatbots-deepreinforcementlearning-activity-7038583238860095489-0eaQ)
